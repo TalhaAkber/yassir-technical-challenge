@@ -6,8 +6,8 @@ async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 
 	const options = new DocumentBuilder()
-		.setTitle('NestJS Pollution API')
-		.setDescription('API documentation for the NestJS Pollution application')
+		.setTitle('Yassir Pollution API')
+		.setDescription('API documentation for the Yassir Technical Challenge')
 		.setVersion('1.0.0')
 		.build();
 
