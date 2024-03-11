@@ -10,7 +10,7 @@ export class IQAirDataService {
         private iqAirRepository: Repository<IQAirDataEntity>,
     ) { }
 
-    async getMostPollutedDateTime(): Promise<IQAirDataEntity | null> {
+    async peakPollutionRecord(): Promise<IQAirDataEntity | null> {
         const mostPollutedData = await this.iqAirRepository.findOne({
             where: {},
             order: {
