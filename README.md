@@ -35,9 +35,9 @@ Follow these steps to set up and run the application:
    npm install
    ```
 
-3. Set up MySQL Database and IQAir Authentication Key:**
+3. Set up MySQL/Postgres Database and IQAir Authentication Key:**
 
-   - Create a MySQL database and update the database credentials in `src/environment/environment.ts`.
+   - Create a MySQL/Postgres database and update the database credentials in `src/environment/environment.ts`.
 
    - If you want to use your own IQAir authentication key, replace the key as well:
 
@@ -48,7 +48,7 @@ Follow these steps to set up and run the application:
      // Replace with your actual IQAir API key or use mine, since for the demo I have left my key there intentionally. This should be a party of environment secret
      ```
 
-   - Ensure the environment file (`src/environment/environment.ts`) is properly configured with your MySQL credentials and database name.
+   - Ensure the environment file (`src/environment/environment.ts`) is properly configured with your database credentials and database name. I have personally tested with both database so it shouldn't be a problem.
 
    This configuration allows the application to authenticate with the IQAir API using your personal key. Update the IQAir API key to access the data seamlessly.
 
@@ -82,7 +82,7 @@ Follow these steps to set up and run the application:
 
 - The application automatically synchronizes the database tables based on the TypeORM entities.
 
-- Ensure that the environment file (`src/environment/environment.ts`) is properly configured with your MySQL credentials and database name.
+- Ensure that the environment file (`src/environment/environment.ts`) is properly configured with your database credentials and database name.
 
 - The cron job is configured to run every minute, fetching weather data from the IQAir API and storing it in the local database.
 
