@@ -7,17 +7,17 @@ import { IQAirDataEntity } from '../entity/iqair-data.entity';
 
 @Injectable()
 export class IQAirJob {
+	
 	constructor(
 		@Inject('IQAIR_REPOSITORY')
 		private iqAirRepository: Repository<IQAirDataEntity>,
 		private readonly iqAirService: ExternalIQAirService
 	) { }
+	private readonly coordinates = [{ lat: 48.856613, lon: 2.352222 }]; // Can be more for different cities
 
 	@Cron(CronExpression.EVERY_MINUTE)
 	async handleCron(): Promise<void> {
-		const coordinates = [{ lat: 48.856613, lon: 2.352222 }];
-
-		for (const { lat, lon } of coordinates) {
+		for (const { lat, lon } of this.coordinates) {
 			try {
 				const response: IQAirData =
 					await this.iqAirService.getIQAirData(lat, lon);

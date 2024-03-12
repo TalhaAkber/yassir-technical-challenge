@@ -70,7 +70,13 @@ Follow these steps to set up and run the application:
    npm run test
    ```
 
-   This command will run both unit tests and e2e tests, providing coverage information.
+   This command will run unit tests and for e2e try:
+
+   ```bash
+   npm run test:e2e
+   ```
+
+   To demonstrate how to mock the API, please refer to the `test/app.e2e-spec.ts` file.   
 
 ## Note
 
