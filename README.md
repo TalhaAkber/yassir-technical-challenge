@@ -1,73 +1,85 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Yassir Technical Challenge
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This repository contains a NestJS application that provides two REST APIs, leveraging the IQAir third-party API to fetch pollution data and a custom database-backed API to determine the most polluted time in Paris. The application includes end-to-end (e2e) testing, unit testing, and coverage.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+### 1. Pollution Data API
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+#### Endpoint: `/pollution`
 
-## Installation
+- **Method**: `GET`
+- **Description**: Retrieves pollution data from the IQAir third-party API based on latitude and longitude.
 
-```bash
-$ npm install
-```
+### 2. Most Polluted Time in Paris API
 
-## Running the app
+#### Endpoint: `/pollution/peak`
 
-```bash
-# development
-$ npm run start
+- **Method**: `GET`
+- **Description**: Retrieves the most polluted date and time in Paris from the local database, which is populated by a cron job running every minute.
 
-# watch mode
-$ npm run start:dev
+## Getting Started
 
-# production mode
-$ npm run start:prod
-```
+Follow these steps to set up and run the application:
 
-## Test
+1. Clone the repository:
 
-```bash
-# unit tests
-$ npm run test
+   ```bash
+   git clone https://github.com/your-username/yassir-technical-challenge.git
+   ```
 
-# e2e tests
-$ npm run test:e2e
+2. Install dependencies:
 
-# test coverage
-$ npm run test:cov
-```
+   ```bash
+   cd yassir-technical-challenge
+   npm install
+   ```
 
-## Support
+3. Set up MySQL Database and IQAir Authentication Key:**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+   - Create a MySQL database and update the database credentials in `src/environment/environment.ts`.
 
-## Stay in touch
+   - If you want to use your own IQAir authentication key, replace the key as well:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+     ```typescript
+     // src/environment/environment.ts
 
-## License
+     key = 'YOUR_IQAIR_API_KEY'; 
+     // Replace with your actual IQAir API key or use mine, since for the demo I have left my key there intentionally. This should be a party of environment secret
+     ```
 
-Nest is [MIT licensed](LICENSE).
+   - Ensure the environment file (`src/environment/environment.ts`) is properly configured with your MySQL credentials and database name.
+
+   This configuration allows the application to authenticate with the IQAir API using your personal key. Update the IQAir API key to access the data seamlessly.
+
+4. Run the Application:
+
+   ```bash
+   npm run start
+   ```
+
+   This command will start the server and the cron job, populating the database with weather data every minute.
+
+5. Access Swagger Documentation:
+
+   Open your browser and go to [http://localhost:3000/api](http://localhost:3000/api) to explore the Swagger documentation for the APIs.
+
+6. Run Tests:
+
+   ```bash
+   npm run test
+   ```
+
+   This command will run both unit tests and e2e tests, providing coverage information.
+
+## Note
+
+- The application automatically synchronizes the database tables based on the TypeORM entities.
+
+- Ensure that the environment file (`src/environment/environment.ts`) is properly configured with your MySQL credentials and database name.
+
+- The cron job is configured to run every minute, fetching weather data from the IQAir API and storing it in the local database.
+
+- Swagger documentation is available at [http://localhost:3000/api](http://localhost:3000/api) for easy API exploration.
+
+Feel free to explore the APIs, run tests, and adapt the application to fit your needs. If you have any questions or face issues, please reach out to us. Good luck with the technical challenge!
