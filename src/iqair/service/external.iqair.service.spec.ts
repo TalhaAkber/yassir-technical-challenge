@@ -19,7 +19,6 @@ describe('ExternalIQAirService', () => {
 	it('should fetch IQAir data for given coordinates', async () => {
 		const result = await service.getIQAirData(35.98, 140.33);
 		expect(result).toBeDefined();
-		// Add more assertions based on the actual response structure
 	});
 
 	it('should throw NotFoundException for invalid coordinates', async () => {

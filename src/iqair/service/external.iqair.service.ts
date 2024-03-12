@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { IQAirData } from '../model/iqair-data.model';
 import axios from 'axios';
-import { environment } from 'src/environment/environment';
+import { environment } from '../../environment/environment';
 
 @Injectable()
 export class ExternalIQAirService {
